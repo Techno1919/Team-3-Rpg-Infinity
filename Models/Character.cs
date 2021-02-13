@@ -4,8 +4,6 @@
 /// Summary description for Class1
 /// </summary>
 /// 
-
-
 namespace RpgInfinity.Models
 {
 	public class Character
