@@ -3,19 +3,12 @@
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-/// 
-
-
-namespace RpgInfinity.Models
+public class Character
 {
-	public class Character
+	public Character()
 	{
-		public Character()
-		{
-			//
-			// TODO: Add constructor logic here
-			//
-		}
+		//
+		// TODO: Add constructor logic here
+		//
 	}
-
 }
