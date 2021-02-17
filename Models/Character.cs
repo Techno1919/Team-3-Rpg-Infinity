@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Summary description for Class1
@@ -8,7 +9,7 @@ namespace RpgInfinity.Models
 {
 	public class Character
 	{
-        public Guid ID { get; set; }
+        public int ID { get; set; }
 
         public CharacterClass CharClass { get; set; }
         public CharacterRace CharRace { get; set; }
@@ -19,7 +20,20 @@ namespace RpgInfinity.Models
         public string Backstory { get; set; }
 
         public bool isSpellCaster { get; set; }
-        public Spell[] SpellsList { get; set; }
+        public List<Spell> SpellsList 
+        {
+            get
+            {
+                return SpellsList;
+            }
+            set
+            {
+                if (isSpellCaster)
+                {
+                    SpellsList = value;
+                }
+            }
+        }
 
         public int Level { get; set; }
         public int Health { get; set; }
@@ -39,8 +53,16 @@ namespace RpgInfinity.Models
             Random gen = new Random();
             Level++;
 
-            Health += gen.Next(CharClass.HitDie + ConstitutionBonus + 1);
+            Health += (gen.Next(CharClass.HitDie + ConstitutionBonus) + 1);
             BaseAttackBonus = (int)(Level * CharClass.AttackBonusPerLevel);
+        }
+
+        public void AddSpell(Spell spell)
+        {
+            if (isSpellCaster)
+            {
+                SpellsList.Add(spell);
+            }
         }
     }
 
