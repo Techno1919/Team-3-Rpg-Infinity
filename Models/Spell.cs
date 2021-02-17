@@ -5,15 +5,15 @@ using System.Web;
 
 namespace RpgInfinity.Models
 {
-    public abstract class Spell
+    public class Spell
     {
         // Level of Spell
-        public abstract int Level { get; protected set; }
+        public int Level { get; protected set; }
 
         // Spell's Name
-        public abstract string Name { get; protected set; }
+        public string Name { get; protected set; }
 
         // Spell Description, what it does.
-        public abstract string Effect { get; protected set; }
+        public string Effect { get; protected set; }
     }
 }
