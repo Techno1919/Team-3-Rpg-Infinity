@@ -241,10 +241,9 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterClass.cs" />
     <Compile Include="Models\CharacterRace.cs" />
-    <Compile Include="Models\Priest.cs" />
-    <Compile Include="Models\Rogue.cs" />
-    <Compile Include="Models\Warrior.cs" />
-    <Compile Include="Models\Wizard.cs" />
+    <Compile Include="Models\Dwarf.cs" />
+    <Compile Include="Models\Elf.cs" />
+    <Compile Include="Models\Human.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
