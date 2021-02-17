@@ -7,14 +7,12 @@ namespace RpgInfinity.Models
 {
     public class Human : CharacterRace
     {
-        public Human()
-        {
-            StrengthBonus = 1;
-            DexterityBonus = 1;
-            ConstituionBonus = 1;
-            IntelligenceBonus = 1;
-            WisdomBonus = 1;
-            CharismaBonus = 1;
-        }
+        public override string Description { get; protected set; } = "Human Desc";
+        public override int StrengthBonus { get; protected set; } = 1;
+        public override int DexterityBonus { get; protected set; } = 1;
+        public override int ConstituionBonus { get; protected set; } = 1;
+        public override int IntelligenceBonus { get; protected set; } = 1;
+        public override int WisdomBonus { get; protected set; } = 1;
+        public override int CharismaBonus { get; protected set; } = 1;
     }
 }

@@ -7,14 +7,12 @@ namespace RpgInfinity.Models
 {
     public class Elf : CharacterRace
     {
-        public Elf()
-        {
-            StrengthBonus = 0;
-            DexterityBonus = 2;
-            ConstituionBonus = -2;
-            IntelligenceBonus = 2;
-            WisdomBonus = 0;
-            CharismaBonus = 0;
-        }
+        public override string Description { get; protected set; } = "Elf Desc";
+        public override int StrengthBonus { get; protected set; } = 0;
+        public override int DexterityBonus { get; protected set; } = 2;
+        public override int ConstituionBonus { get; protected set; } = -2;
+        public override int IntelligenceBonus { get; protected set; } = 2;
+        public override int WisdomBonus { get; protected set; } = 0;
+        public override int CharismaBonus { get; protected set; } = 0;
     }
 }
