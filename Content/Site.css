@@ -27,3 +27,7 @@ textarea {
 .LGSU {
     float: right;
 }
+
+.link:hover{
+    background-color: #c1c8e4;
+}
