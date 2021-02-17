@@ -16,8 +16,17 @@ namespace RpgInfinity.Models
 
         public string Name { get; set; }
         public string Gender { get; set; }
+        public string Backstory { get; set; }
+
+        public bool isSpellCaster { get; set; }
+        public Spell[] SpellsList { get; set; }
 
         public int Level { get; set; }
+        public int Health { get; set; }
+        public int ArmorClass { get; set; }
+        public int ConstitutionBonus { get; set; }
+        public int BaseAttackBonus { get; set; }
+
         public int Strength { get; set; }
         public int Dexterity { get; set; }
         public int Constitution { get; set; }
@@ -25,19 +34,26 @@ namespace RpgInfinity.Models
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
 
-        public int BaseAttackBonus { get; set; }
+        public void LevelUp()
+        {
+            Random gen = new Random();
+            Level++;
+
+            Health += gen.Next(CharClass.HitDie + ConstitutionBonus + 1);
+            BaseAttackBonus = (int)(Level * CharClass.AttackBonusPerLevel);
+        }
     }
 
 	public enum eAlignment
     {
-        Lawful_Good,
-        Neutral_Good,
-        Chaotic_Good,
-        Lawful_Neutral,
-        True_Neutral,
-        Chaotic_Neutral,
-        Lawful_Evil,
-        Neutral_Evil,
-        Chaotic_Evil
+        Lawful_Good = 1,
+        Neutral_Good = 2,
+        Chaotic_Good = 3,
+        Lawful_Neutral = 4,
+        True_Neutral = 5,
+        Chaotic_Neutral = 6,
+        Lawful_Evil = 7,
+        Neutral_Evil = 8,
+        Chaotic_Evil = 9
     }
 }
