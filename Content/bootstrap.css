@@ -5015,7 +5015,7 @@ a.badge:focus {
     margin-bottom: 30px;
     color: inherit;
     background-color: #c1c8e4;
-    border-style: outset;
+    border-style: solid;
 }
 .jumbotron h1,
 .jumbotron .h1 {
