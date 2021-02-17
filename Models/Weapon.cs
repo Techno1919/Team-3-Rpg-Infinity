@@ -9,6 +9,6 @@ namespace RpgInfinity.Models
     {
         public abstract string Name { get; protected set; }
         public abstract int MinimumDamage { get; protected set; }
-        public abstract int MaximumDamagea { get; protected set; }
+        public abstract int MaximumDamage { get; protected set; }
     }
 }
