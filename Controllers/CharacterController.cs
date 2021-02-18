@@ -6,12 +6,15 @@ using System.Web.Mvc;
 
 namespace RpgInfinity.Controllers
 {
+
+
     public class CharacterController : Controller
     {
+        public static IList<Models.Character> characters = new List<Models.Character>();
         // GET: Character
         public ActionResult Index()
         {
-            return View();
+            return View(characters);
         }
 
         // GET: Character/Details/5
