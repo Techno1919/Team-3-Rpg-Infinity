@@ -40,12 +40,12 @@ namespace RpgInfinity.Models
         public int ArmorClass { get; set; }
         public int BaseAttackBonus { get; set; }
 
-        public int StrengthBonus { get; set; }
-        public int DexterityBonus { get; set; }
-        public int ConstitutionBonus { get; set; }
-        public int IntelligenceBonus { get; set; }
-        public int WisdomBonus { get; set; }
-        public int CharismaBonus { get; set; }
+        public int StrengthBonus { get; private set; }
+        public int DexterityBonus { get; private set; }
+        public int ConstitutionBonus { get; private set; }
+        public int IntelligenceBonus { get; private set; }
+        public int WisdomBonus { get; private set; }
+        public int CharismaBonus { get; private set; }
 
         public int Strength { get; set; }
         public int Dexterity { get; set; }
@@ -53,6 +53,23 @@ namespace RpgInfinity.Models
         public int Intelligence { get; set; }
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
+
+        public void SetStatBonuses()
+        {
+            StrengthBonus = SetStatBonus(Strength);
+            DexterityBonus = SetStatBonus(Dexterity);
+            ConstitutionBonus =  SetStatBonus(Constitution);
+            IntelligenceBonus = SetStatBonus(Intelligence);
+            WisdomBonus = SetStatBonus(Wisdom);
+            CharismaBonus = SetStatBonus(Charisma);
+        }
+
+        private int SetStatBonus(int stat)
+        {
+            var tempBonus = (stat - 10) / 2;
+
+            return tempBonus;
+        }
 
         public void LevelUp()
         {
