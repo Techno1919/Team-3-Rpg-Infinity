@@ -38,14 +38,8 @@ namespace RpgInfinity.Models
         public int Level { get; set; }
         public int Health { get; set; }
         public int ArmorClass { get; set; }
-        public int BaseAttackBonus { get; set; }
-
-        public int StrengthBonus { get; set; }
-        public int DexterityBonus { get; set; }
         public int ConstitutionBonus { get; set; }
-        public int IntelligenceBonus { get; set; }
-        public int WisdomBonus { get; set; }
-        public int CharismaBonus { get; set; }
+        public int BaseAttackBonus { get; set; }
 
         public int Strength { get; set; }
         public int Dexterity { get; set; }
