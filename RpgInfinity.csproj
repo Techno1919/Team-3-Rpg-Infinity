@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
     </Reference>
@@ -238,6 +244,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="database_firewall_rules.cs">
+      <DependentUpon>RPGInfinityDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +263,21 @@
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Models\Wizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RPGInfinityDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPGInfinityDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPGInfinityDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPGInfinityDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPGInfinityDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPGInfinityDB.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -265,8 +289,25 @@
     <Content Include="Content\Site.css" />
     <Content Include="Logo.ico" />
     <Content Include="Images\Logo.png" />
+    <Content Include="RPGInfinityDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RPGInfinityDB.Context.cs</LastGenOutput>
+      <DependentUpon>RPGInfinityDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="RPGInfinityDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RPGInfinityDB.edmx</DependentUpon>
+      <LastGenOutput>RPGInfinityDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="RPGInfinityDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RPGInfinityDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="RPGInfinityDB.edmx.diagram">
+      <DependentUpon>RPGInfinityDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
