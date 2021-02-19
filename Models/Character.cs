@@ -15,6 +15,10 @@ namespace RpgInfinity.Models
         [Key]
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "Name is Required")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Gender is Required")]
+        public string Gender { get; set; }
         [Required(ErrorMessage = "Character Class is Required")]
         public CharacterClass CharClass { get; set; }
         [Required(ErrorMessage = "Character Race is Required")]
@@ -22,27 +26,18 @@ namespace RpgInfinity.Models
         [Required(ErrorMessage = "Alignment is Required")]
         public eAlignment Alignment { get; set; }
 
-        [Required(ErrorMessage = "Name is Required")]
-        public string Name { get; set; }
-        [Required(ErrorMessage = "Gender is Required")]
-        public string Gender { get; set; }
-        public string Backstory { get; set; }
-
-        public bool isSpellCaster { get; set; }
-        public List<Spell> SpellsList 
-        {
-            get
-            {
-                return SpellsList;
-            }
-            set
-            {
-                if (isSpellCaster)
-                {
-                    SpellsList = value;
-                }
-            }
-        }
+        [Required(ErrorMessage = "Strength is Required")]
+        public int Strength { get; set; }
+        [Required(ErrorMessage = "Dexterity is Required")]
+        public int Dexterity { get; set; }
+        [Required(ErrorMessage = "Constitution is Required")]
+        public int Constitution { get; set; }
+        [Required(ErrorMessage = "Intelligence is Required")]
+        public int Intelligence { get; set; }
+        [Required(ErrorMessage = "Wisdom is Required")]
+        public int Wisdom { get; set; }
+        [Required(ErrorMessage = "Charisma is Required")]
+        public int Charisma { get; set; }
 
         [Required(ErrorMessage = "Level is Required")]
         public int Level { get; set; }
@@ -60,19 +55,23 @@ namespace RpgInfinity.Models
         public int WisdomBonus { get; private set; }
         public int CharismaBonus { get; private set; }
 
-        [Required(ErrorMessage = "Strength is Required")]
-        public int Strength { get; set; }
-        [Required(ErrorMessage = "Dexterity is Required")]
-        public int Dexterity { get; set; }
-        [Required(ErrorMessage = "Constitution is Required")]
-        public int Constitution { get; set; }
-        [Required(ErrorMessage = "Intelligence is Required")]
-        public int Intelligence { get; set; }
-        [Required(ErrorMessage = "Wisdom is Required")]
-        public int Wisdom { get; set; }
-        [Required(ErrorMessage = "Charisma is Required")]
-        public int Charisma { get; set; }
+        public string Backstory { get; set; }
 
+        public bool isSpellCaster { get; set; }
+        public List<Spell> SpellsList 
+        {
+            get
+            {
+                return SpellsList;
+            }
+            set
+            {
+                if (isSpellCaster)
+                {
+                    SpellsList = value;
+                }
+            }
+        }
         public void SetStatBonuses()
         {
             StrengthBonus = SetStatBonus(Strength);
