@@ -13,6 +13,8 @@ namespace RpgInfinity.Models
         [Key]
         public int ID { get; set; }
 
+        public string Name { get; set; }
+
         public abstract string Description { get; protected set; }
         public abstract int StrengthBonus { get; protected set; }
         public abstract int DexterityBonus { get; protected set; }

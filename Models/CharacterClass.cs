@@ -13,6 +13,8 @@ namespace RpgInfinity.Models
         [Key]
         public int ID { get; set; }
 
+        public string Name { get; set; }
+
         public abstract int HitDie { get; protected set; }
 
         public abstract float AttackBonusPerLevel { get; protected set; }
