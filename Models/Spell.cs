@@ -7,6 +7,8 @@ namespace RpgInfinity.Models
 {
     public class Spell
     {
+        public int ID { get; set; }
+
         // Level of Spell
         public int Level { get; protected set; }
 
