@@ -26,5 +26,7 @@ namespace RpgInfinity
         }
     
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+
+        public System.Data.Entity.DbSet<RpgInfinity.Models.Character> Characters { get; set; }
     }
 }

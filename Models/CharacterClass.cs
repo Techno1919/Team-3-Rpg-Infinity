@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RpgInfinity.Models
 {
-    [Table("")]
+    [Table("CharacterClass")]
     public abstract class CharacterClass
     {
         [Key]
