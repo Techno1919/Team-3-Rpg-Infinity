@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 /// <summary>
 /// Summary description for Class1
@@ -8,8 +9,10 @@ using System.ComponentModel.DataAnnotations;
 /// 
 namespace RpgInfinity.Models
 {
+    [Table("Characters")]
 	public class Character
 	{
+        [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Character Class is Required")]
