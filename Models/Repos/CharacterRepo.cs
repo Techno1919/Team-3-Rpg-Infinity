@@ -10,8 +10,16 @@ namespace RpgInfinity.Models.Repos
 {
     public class CharacterRepo : ICharacterRepo
     {
-        private string _connString = "metadata=res://*/RPGInfinityDB.csdl|res://*/RPGInfinityDB.ssdl|res://*/RPGInfinityDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=rpg-infinity.database.windows.net;initial catalog=RPGInfinity;persist security info=True;user id=login;password=Password123;MultipleActiveResultSets=True;App=EntityFramework&quot;";//ConfigurationManager.ConnectionStrings["RPGInfinityEntities"].ConnectionString;
+        private string _connString = ConfigurationManager.ConnectionStrings["RPGInfinityEntities"].ConnectionString;
         private IList<Character> _characterList;
+
+        public CharacterRepo()
+        {
+            if (Equals(_characterList, null))
+            {
+                _characterList = new List<Character>();
+            }
+        }
 
         public bool AddCharacter(Character character)
         {
