@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RpgInfinity.Models;
+using RpgInfinity.Models.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,7 @@ namespace RpgInfinity.Controllers
 
     public class CharacterController : Controller
     {
-        public static IList<Models.Character> characters = new List<Models.Character>();
+        public static IEnumerable<Models.Character> characters = new List<Models.Character>();
         // GET: Character
         public ActionResult Index()
         {
@@ -31,11 +33,14 @@ namespace RpgInfinity.Controllers
 
         // POST: Character/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Character character)
         {
             try
             {
                 // TODO: Add insert logic here
+                var repo = new CharacterRepo();
+
+                repo.AddCharacter(character);
 
                 return RedirectToAction("Index");
             }
