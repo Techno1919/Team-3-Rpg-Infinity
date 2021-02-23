@@ -44,7 +44,7 @@ namespace RpgInfinity.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
