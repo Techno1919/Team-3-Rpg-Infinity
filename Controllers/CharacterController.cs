@@ -46,6 +46,7 @@ namespace RpgInfinity.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return View();
             }
         }
