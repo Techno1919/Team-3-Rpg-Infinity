@@ -16,7 +16,12 @@ namespace RpgInfinity.Controllers
         // GET: Character
         public ActionResult Index()
         {
-            return View(characters);
+            IEnumerable<Character> charList = new List<Character>();
+            var repo = new CharacterRepo();
+
+            charList = repo.GetAllCharacters();
+
+            return View(charList);
         }
 
         // GET: Character/Details/5

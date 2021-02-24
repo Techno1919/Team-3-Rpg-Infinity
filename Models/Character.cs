@@ -20,11 +20,12 @@ namespace RpgInfinity.Models
         [Required(ErrorMessage = "Gender is Required")]
         public string Gender { get; set; }
         [Required(ErrorMessage = "Character Class is Required")]
-        public CharacterClass CharClass { get; set; }
+        public int CharClassId { get; set; }
         [Required(ErrorMessage = "Character Race is Required")]
-        public CharacterRace CharRace { get; set; }
+        public int CharRaceId { get; set; }
         [Required(ErrorMessage = "Alignment is Required")]
         public eAlignment Alignment { get; set; }
+        public string AlignmentText { get; set; }
 
         [Required(ErrorMessage = "Strength is Required")]
         public int Strength { get; set; }
@@ -72,6 +73,10 @@ namespace RpgInfinity.Models
                 }
             }
         }
+
+        CharacterClass CharClass { get; set; }
+        CharacterRace CharRace { get; set; }
+
         public void SetStatBonuses()
         {
             StrengthBonus = SetStatBonus(Strength);

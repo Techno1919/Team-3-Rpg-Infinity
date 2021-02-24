@@ -34,11 +34,12 @@ namespace RpgInfinity.Models.Repos
                 //
                 // Define StoredProc parameters
 
-                cmd.Parameters.AddWithValue("@Name", character.Name);
-                cmd.Parameters.AddWithValue("@Gender", character.Gender);
-                cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@CharClass", 1);
                 cmd.Parameters.AddWithValue("@CharRace", 1);
+                cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
+                cmd.Parameters.AddWithValue("@Name", character.Name);
+                cmd.Parameters.AddWithValue("@Gender", character.Gender);
+                cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
                 cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
                 cmd.Parameters.AddWithValue("@Level", character.Level);
                 cmd.Parameters.AddWithValue("@Health", character.Health);
@@ -50,7 +51,6 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
-                cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
                 //
                 // Open DB Connection
                 con.Open();
@@ -75,7 +75,49 @@ namespace RpgInfinity.Models.Repos
 
         public IEnumerable<Character> GetAllCharacters()
         {
-            throw new NotImplementedException();
+            //
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                var cmd = new SqlCommand("SELECT * FROM Characters", con);
+                cmd.CommandType = CommandType.Text;
+                //
+                con.Open();
+                //
+                SqlDataReader rdr = cmd.ExecuteReader();
+                //
+                while (rdr.Read())
+                {
+                    //
+                    var cha = new Character();
+                    //
+                    cha.ID = Convert.ToInt32(rdr["Id"]);
+                    cha.CharClassId = (int)rdr["CharClass"];
+                    cha.CharRaceId = (int)rdr["CharRace"];
+                    //cha.Alignment = ((eAlignment)((int)rdr["Alignment"]));
+                    cha.AlignmentText = rdr["Alignment"].ToString();
+                    cha.Name = rdr["Name"].ToString();
+                    cha.Gender = rdr["Gender"].ToString();
+                    cha.Backstory = rdr["Backstory"].ToString();
+                    cha.isSpellCaster = Convert.ToBoolean(rdr["isSpellCaster"]);
+                    cha.Level = (int)rdr["Level"];
+                    cha.Health = (int)rdr["Health"];
+                    cha.ArmorClass = (int)rdr["ArmorClass"];
+                    cha.BaseAttackBonus = (int)rdr["BaseAttackBonus"];
+                    cha.Strength = (int)rdr["Strength"];
+                    cha.Dexterity = (int)rdr["Dexterity"];
+                    cha.Constitution = (int)rdr["Constitution"];
+                    cha.Intelligence = (int)rdr["Intelligence"];
+                    cha.Wisdom = (int)rdr["Wisdom"];
+                    cha.Charisma = (int)rdr["Charisma"];
+                    
+                    //
+                    // Add your object to your list
+                    _characterList.Add(cha);
+                }
+            }
+            //
+            return _characterList;
         }
 
         public bool UpdateCharacter(Character character)
