@@ -15,19 +15,25 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlignmentText)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit Sheet", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("View Sheet", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete Character", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AlignmentText)
+    </td>
+    <td>
+        @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
+    </td>
+</tr>
 }
 
 </table>

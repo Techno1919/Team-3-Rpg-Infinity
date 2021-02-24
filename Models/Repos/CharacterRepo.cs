@@ -94,8 +94,8 @@ namespace RpgInfinity.Models.Repos
                     cha.ID = Convert.ToInt32(rdr["Id"]);
                     cha.CharClassId = (int)rdr["CharClass"];
                     cha.CharRaceId = (int)rdr["CharRace"];
-                    //cha.Alignment = ((eAlignment)((int)rdr["Alignment"]));
-                    cha.AlignmentText = rdr["Alignment"].ToString();
+                    cha.Alignment = (eAlignment)rdr["Alignment"];
+                    //cha.AlignmentText = rdr["Alignment"].ToString();
                     cha.Name = rdr["Name"].ToString();
                     cha.Gender = rdr["Gender"].ToString();
                     cha.Backstory = rdr["Backstory"].ToString();
