@@ -15,12 +15,17 @@ namespace RpgInfinity.Models
         [Key]
         public int ID { get; set; }
 
-        public static IEnumerable<eAlignment>
-        Colors = new List<eAlignment>
+        public static List<string> alignments = new List<string>()
         {
-            eAlignment.Chaotic_Evil,
-            eAlignment.Chaotic_Good,
-            eAlignment.Chaotic_Neutral
+            "Lawful_Good",
+            "Neutral_Good",
+            "Chaotic_Good",
+            "Lawful_Neutral",
+            "True_Neutral",
+            "Chaotic_Neutral",
+            "Lawful_Evil",
+            "Neutral_Evil",
+            "Chaotic_Evil"
         };
 
         [Required(ErrorMessage = "Name is Required")]
@@ -32,8 +37,7 @@ namespace RpgInfinity.Models
         [Required(ErrorMessage = "Character Race is Required")]
         public int CharRaceId { get; set; }
         [Required(ErrorMessage = "Alignment is Required")]
-        public eAlignment Alignment { get; set; }
-        public string AlignmentText { get; set; }
+        public string Alignment { get; set; }
 
         [Required(ErrorMessage = "Strength is Required")]
         public int Strength { get; set; }
@@ -121,16 +125,5 @@ namespace RpgInfinity.Models
         }
     }
 
-	public enum eAlignment
-    {
-        Lawful_Good,
-        Neutral_Good,
-        Chaotic_Good,
-        Lawful_Neutral,
-        True_Neutral,
-        Chaotic_Neutral,
-        Lawful_Evil,
-        Neutral_Evil,
-        Chaotic_Evil
-    }
+
 }
