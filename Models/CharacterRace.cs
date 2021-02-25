@@ -10,12 +10,12 @@ namespace RpgInfinity.Models
     [Table("CharacterRace")]
     public abstract class CharacterRace
     {
-        public enum eRace
+        public List<string> eRace = new List<string>()
         {
-            Human = 1,
-            Dwarf = 2,
-            Elf = 3,
-        }
+            "Human",
+            "Dwarf",
+            "Elf",
+        };
 
         [Key]
         public int ID { get; set; }
