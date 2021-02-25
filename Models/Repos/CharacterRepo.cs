@@ -121,7 +121,101 @@ namespace RpgInfinity.Models.Repos
 
         public bool UpdateCharacter(Character character)
         {
-            throw new NotImplementedException();
+            var retVal = false;
+
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("UpdateCharacter", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
+                cmd.Parameters.AddWithValue("@ID", character.ID);
+                cmd.Parameters.AddWithValue("@CharClass", 1);
+                cmd.Parameters.AddWithValue("@CharRace", 1);
+                cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
+                cmd.Parameters.AddWithValue("@Name", character.Name);
+                cmd.Parameters.AddWithValue("@Gender", character.Gender);
+                cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
+                cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
+                cmd.Parameters.AddWithValue("@Level", character.Level);
+                cmd.Parameters.AddWithValue("@Health", character.Health);
+                cmd.Parameters.AddWithValue("@ArmorClass", character.ArmorClass);
+                cmd.Parameters.AddWithValue("@BaseAttackBonus", character.BaseAttackBonus);
+                cmd.Parameters.AddWithValue("@Strength", character.Strength);
+                cmd.Parameters.AddWithValue("@Dexterity", character.Dexterity);
+                cmd.Parameters.AddWithValue("@Constitution", character.Constitution);
+                cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
+                cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
+                cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                int i = cmd.ExecuteNonQuery();
+
+                if (i >= 1)
+                {
+                    retVal = true;
+                }
+            }
+            //
+            // Return Success / Failure
+            return retVal;
+        }
+
+        public Character GetCharacter(int id)
+        {
+            Character chaDetails;
+
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("GetCharacterDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
+                cmd.Parameters.AddWithValue("@ID", id);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                //
+                // Read the data
+                rdr.Read();
+                //
+                // Populate our Student model
+                chaDetails = new Character
+                {
+                    ID = Convert.ToInt32(rdr["Id"]),
+                    CharClassId = (int)rdr["CharClass"],
+                    CharRaceId = (int)rdr["CharRace"],
+                    Alignment = rdr["Alignment"].ToString(),
+                    Name = rdr["Name"].ToString(),
+                    Gender = rdr["Gender"].ToString(),
+                    Backstory = rdr["Backstory"].ToString(),
+                    isSpellCaster = Convert.ToBoolean(rdr["isSpellCaster"]),
+                    Level = (int)rdr["Level"],
+                    Health = (int)rdr["Health"],
+                    ArmorClass = (int)rdr["ArmorClass"],
+                    BaseAttackBonus = (int)rdr["BaseAttackBonus"],
+                    Strength = (int)rdr["Strength"],
+                    Dexterity = (int)rdr["Dexterity"],
+                    Constitution = (int)rdr["Constitution"],
+                    Intelligence = (int)rdr["Intelligence"],
+                    Wisdom = (int)rdr["Wisdom"],
+                    Charisma = (int)rdr["Charisma"]
+            };
+
+            }
+            //
+            //
+            return chaDetails;
         }
     }
 }

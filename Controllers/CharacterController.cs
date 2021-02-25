@@ -27,7 +27,9 @@ namespace RpgInfinity.Controllers
         // GET: Character/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var repo = new CharacterRepo();
+
+            return View(repo.GetCharacter(id));
         }
 
         // GET: Character/Create
@@ -59,23 +61,20 @@ namespace RpgInfinity.Controllers
         // GET: Character/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var repo = new CharacterRepo();
+
+            return View(repo.GetCharacter(id));
         }
 
         // POST: Character/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Character character)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var repo = new CharacterRepo();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            repo.UpdateCharacter(character);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Character/Delete/5
