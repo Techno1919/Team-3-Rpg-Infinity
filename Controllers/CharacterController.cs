@@ -9,7 +9,6 @@ using System.Web.Mvc;
 namespace RpgInfinity.Controllers
 {
 
-
     public class CharacterController : Controller
     {
         public static IEnumerable<Models.Character> characters = new List<Models.Character>();
@@ -70,11 +69,11 @@ namespace RpgInfinity.Controllers
         [HttpPost]
         public ActionResult Edit(Character character)
         {
-            var repo = new CharacterRepo();
+                var repo = new CharacterRepo();
 
-            repo.UpdateCharacter(character);
+                repo.UpdateCharacter(character);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
         }
 
         // GET: Character/Delete/5
