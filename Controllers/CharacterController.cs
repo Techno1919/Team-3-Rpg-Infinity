@@ -79,16 +79,20 @@ namespace RpgInfinity.Controllers
         // GET: Character/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var repo = new CharacterRepo();
+
+            return View(repo.GetCharacter(id));
         }
 
         // POST: Character/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Character character)
         {
             try
             {
-                // TODO: Add delete logic here
+                var repo = new CharacterRepo();
+
+                repo.DeleteCharacter(id);
 
                 return RedirectToAction("Index");
             }

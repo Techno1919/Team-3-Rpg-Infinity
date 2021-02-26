@@ -70,7 +70,32 @@ namespace RpgInfinity.Models.Repos
 
         public bool DeleteCharacter(int charId)
         {
-            throw new NotImplementedException();
+            var retVal = false;
+
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("DeleteCharacter", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
+                cmd.Parameters.AddWithValue("@ID", charId);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                int i = cmd.ExecuteNonQuery();
+
+                if (i >= 1)
+                {
+                    retVal = true;
+                }
+            }
+            //
+            // Return Success / Failure
+            return retVal;
         }
 
         public IEnumerable<Character> GetAllCharacters()
