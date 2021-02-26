@@ -1447,6 +1447,7 @@ dd {
     border-color: black;
     text-align: center;
     margin-bottom: 10px;
+    border-width: thin;
 }
 @media (min-width: 768px) {
   .dl-horizontal dt {
