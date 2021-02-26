@@ -109,9 +109,10 @@ namespace RpgInfinity.Models.Repos
                     cha.Intelligence = (int)rdr["Intelligence"];
                     cha.Wisdom = (int)rdr["Wisdom"];
                     cha.Charisma = (int)rdr["Charisma"];
-                    
+
                     //
                     // Add your object to your list
+                    cha.SetStatBonuses();
                     _characterList.Add(cha);
                 }
             }
@@ -211,7 +212,7 @@ namespace RpgInfinity.Models.Repos
                     Wisdom = (int)rdr["Wisdom"],
                     Charisma = (int)rdr["Charisma"]
             };
-
+                chaDetails.SetStatBonuses();
             }
             //
             //
