@@ -20,20 +20,24 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Alignment)
-    </td>
-    <td>
-        @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alignment)
+            </td>
+            <td>
+                @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="powr-music-player" id="8def5660_1614303630"></div>
+<script src="https://www.powr.io/powr.js?platform=html%22%3E"></script>
