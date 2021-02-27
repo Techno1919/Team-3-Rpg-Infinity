@@ -34,8 +34,8 @@ namespace RpgInfinity.Models.Repos
                 //
                 // Define StoredProc parameters
 
-                cmd.Parameters.AddWithValue("@CharClass", 1);
-                cmd.Parameters.AddWithValue("@CharRace", 1);
+                cmd.Parameters.AddWithValue("@CharClass", character.CharClassId);
+                cmd.Parameters.AddWithValue("@CharRace", character.CharRaceId);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);
@@ -158,8 +158,8 @@ namespace RpgInfinity.Models.Repos
                 //
                 // Define StoredProc parameters
                 cmd.Parameters.AddWithValue("@ID", character.ID);
-                cmd.Parameters.AddWithValue("@CharClass", 1);
-                cmd.Parameters.AddWithValue("@CharRace", 1);
+                cmd.Parameters.AddWithValue("@CharClass", character.CharClassId);
+                cmd.Parameters.AddWithValue("@CharRace", character.CharRaceId);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);

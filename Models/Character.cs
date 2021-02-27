@@ -33,8 +33,10 @@ namespace RpgInfinity.Models
         [Required(ErrorMessage = "Gender is Required")]
         public string Gender { get; set; }
         [Required(ErrorMessage = "Character Class is Required")]
+        [Display(Name="Class")]
         public int CharClassId { get; set; }
         [Required(ErrorMessage = "Character Race is Required")]
+        [Display(Name = "Race")]
         public int CharRaceId { get; set; }
         [Required(ErrorMessage = "Alignment is Required")]
         public string Alignment { get; set; }
@@ -86,6 +88,9 @@ namespace RpgInfinity.Models
                 }
             }
         }
+
+        public CharacterClass.eClass eClass;
+        public CharacterRace.eRace eRace;
 
         CharacterClass CharClass { get; set; }
         CharacterRace CharRace { get; set; }

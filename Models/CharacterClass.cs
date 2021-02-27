@@ -10,6 +10,14 @@ namespace RpgInfinity.Models
     [Table("CharacterClass")]
     public abstract class CharacterClass
     {
+        public enum eClass
+        {
+            Wizard = 1,
+            Cleric = 2,
+            Rogue = 3,
+            Warrior = 4
+        }
+
         [Key]
         public int ID { get; set; }
 
