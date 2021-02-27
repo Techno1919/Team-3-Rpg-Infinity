@@ -8,7 +8,7 @@ using System.Web;
 namespace RpgInfinity.Models
 {
     [Table("CharacterRace")]
-    public abstract class CharacterRace
+    public class CharacterRace
     {
         public enum eRace
         {
@@ -22,13 +22,13 @@ namespace RpgInfinity.Models
 
         public string Name { get; set; }
 
-        public abstract string Description { get; protected set; }
-        public abstract int StrengthBonus { get; protected set; }
-        public abstract int DexterityBonus { get; protected set; }
-        public abstract int ConstituionBonus { get; protected set; }
-        public abstract int IntelligenceBonus { get; protected set; }
-        public abstract int WisdomBonus { get; protected set; }
-        public abstract int CharismaBonus { get; protected set; }
+        public int StrengthBonus { get; set; }
+        public int DexterityBonus { get; set; }
+        public int ConstitutionBonus { get; set; }
+        public int IntelligenceBonus { get; set; }
+        public int WisdomBonus { get; set; }
+        public int CharismaBonus { get; set; }
+        public string Description { get; set; }
 
     }
 }

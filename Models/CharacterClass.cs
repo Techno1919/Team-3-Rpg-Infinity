@@ -8,7 +8,7 @@ using System.Web;
 namespace RpgInfinity.Models
 {
     [Table("CharacterClass")]
-    public abstract class CharacterClass
+    public class CharacterClass
     {
         public enum eClass
         {
@@ -23,10 +23,10 @@ namespace RpgInfinity.Models
 
         public string Name { get; set; }
 
-        public abstract int HitDie { get; protected set; }
+        public int HitDie { get; set; }
 
-        public abstract float AttackBonusPerLevel { get; protected set; }
+        public float AttackBonusPerLevel { get; set; }
 
-        public abstract string Description { get; protected set; }
+        public string Description { get; set; }
     }
 }

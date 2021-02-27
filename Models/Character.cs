@@ -92,8 +92,8 @@ namespace RpgInfinity.Models
         public CharacterClass.eClass eClass;
         public CharacterRace.eRace eRace;
 
-        CharacterClass CharClass { get; set; }
-        CharacterRace CharRace { get; set; }
+        public CharacterClass CharClass { get; set; }
+        public CharacterRace CharRace { get; set; }
 
         public void SetStatBonuses()
         {
