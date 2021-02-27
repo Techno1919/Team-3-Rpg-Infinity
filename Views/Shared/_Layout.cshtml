@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using RpgInfinity.Controllers
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,8 +26,14 @@
                     <li class="link">@Html.ActionLink("Character List", "Index", "Character")</li>
                 </ul>
                 <ul class="nav navbar-nav LGSU">
+                    @*@if (RpgInfinity.Controllers.HomeController._currentUser == null)*@
                     <li class="link">@Html.ActionLink("Login", "Login", "Home")</li>
                     <li class="link">@Html.ActionLink("Sign Up", "Sign Up", "Home")</li>
+                    @*@if (HomeController._currentUser != null)
+                    {
+                        <content>Hello, @HomeController._currentUser.Username</content>
+                        <li class="link">@Html.ActionLink("Log Out", "Logout", "Home")</li>
+                    }*@
                 </ul>
             </div>
         </div>

@@ -261,6 +261,7 @@
     <Compile Include="Models\Repos\ICharacterRepo.cs" />
     <Compile Include="Models\Rogue.cs" />
     <Compile Include="Models\Spell.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Warrior.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Models\Wizard.cs" />
