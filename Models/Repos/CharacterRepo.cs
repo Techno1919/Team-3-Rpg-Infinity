@@ -34,6 +34,8 @@ namespace RpgInfinity.Models.Repos
                 //
                 // Define StoredProc parameters
 
+                
+
                 cmd.Parameters.AddWithValue("@CharClass", character.CharClassId);
                 cmd.Parameters.AddWithValue("@CharRace", character.CharRaceId);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
@@ -279,15 +281,18 @@ namespace RpgInfinity.Models.Repos
                 // Read the data
                 rdr.Read();
                 //
-                // Populate our Student model
-                classDetails = new CharacterClass
-                {
-                    ID = Convert.ToInt32(rdr["Id"]),
-                    Name = rdr["ClassString"].ToString(),
-                    HitDie = (int)rdr["HitDie"],
-                    AttackBonusPerLevel = (float)rdr["AttackBonusPerLevel"],
-                    Description = rdr["Description"].ToString()
-                };
+                // Populate our Student 
+                var v = rdr["HitDie"];
+                var d = rdr["AttackBonusPerLevel"];
+
+                classDetails = new CharacterClass();
+                classDetails.ID = Convert.ToInt32(rdr["Id"]);
+                classDetails.Name = rdr["ClassString"].ToString();
+                classDetails.HitDie = Convert.ToInt32(rdr["HitDie"]);
+                float.TryParse(rdr["AttackBonusPerLevel"].ToString(), out float test);
+                classDetails.AttackBonusPerLevel = test;
+                classDetails.Description = rdr["Description"].ToString();
+
             }
             //
             //

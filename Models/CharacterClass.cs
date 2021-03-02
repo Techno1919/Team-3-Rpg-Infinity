@@ -10,17 +10,18 @@ namespace RpgInfinity.Models
     [Table("CharacterClass")]
     public class CharacterClass
     {
-        public enum eClass
+        public static string[] CharClass = new string[]
         {
-            Wizard = 1,
-            Cleric = 2,
-            Rogue = 3,
-            Warrior = 4
-        }
+            "Wizard",
+            "Cleric",
+            "Rogue",
+            "Warrior"
+        };
 
         [Key]
         public int ID { get; set; }
 
+        [Display(Name = "Class")]
         public string Name { get; set; }
 
         public int HitDie { get; set; }

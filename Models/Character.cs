@@ -34,6 +34,7 @@ namespace RpgInfinity.Models
         public string Gender { get; set; }
         [Required(ErrorMessage = "Character Class is Required")]
         [Display(Name="Class")]
+        public string CharClassString { get; set; }
         public int CharClassId { get; set; }
         [Required(ErrorMessage = "Character Race is Required")]
         [Display(Name = "Race")]
