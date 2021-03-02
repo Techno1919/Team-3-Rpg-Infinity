@@ -246,12 +246,94 @@ namespace RpgInfinity.Models.Repos
                     Intelligence = (int)rdr["Intelligence"],
                     Wisdom = (int)rdr["Wisdom"],
                     Charisma = (int)rdr["Charisma"]
-            };
+                };
                 chaDetails.SetStatBonuses();
+                chaDetails.CharClass = GetCharacterClass(chaDetails.CharClassId);
+                chaDetails.CharRace = GetCharacterRace(chaDetails.CharRaceId);
             }
             //
             //
             return chaDetails;
+        }
+
+        public CharacterClass GetCharacterClass(int id)
+        {
+            CharacterClass classDetails;
+
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("GetClassDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
+                cmd.Parameters.AddWithValue("@ID", id);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                //
+                // Read the data
+                rdr.Read();
+                //
+                // Populate our Student model
+                classDetails = new CharacterClass
+                {
+                    ID = Convert.ToInt32(rdr["Id"]),
+                    Name = rdr["ClassString"].ToString(),
+                    HitDie = (int)rdr["HitDie"],
+                    AttackBonusPerLevel = (float)rdr["AttackBonusPerLevel"],
+                    Description = rdr["Description"].ToString()
+                };
+            }
+            //
+            //
+            return classDetails;
+        }
+
+        public CharacterRace GetCharacterRace(int id)
+        {
+            CharacterRace raceDetails;
+
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("GetRaceDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
+                cmd.Parameters.AddWithValue("@ID", id);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                //
+                // Read the data
+                rdr.Read();
+                //
+                // Populate our Student model
+                raceDetails = new CharacterRace
+                {
+                    ID = Convert.ToInt32(rdr["Id"]),
+                    Name = rdr["RaceString"].ToString(),
+                    StrengthBonus = (int)rdr["StrengthBonus"],
+                    DexterityBonus = (int)rdr["DexterityBonus"],
+                    ConstitutionBonus = (int)rdr["ConstitutionBonus"],
+                    IntelligenceBonus = (int)rdr["IntelligenceBonus"],
+                    WisdomBonus = (int)rdr["WisdomBonus"],
+                    CharismaBonus = (int)rdr["CharismaBonus"],
+                    Description = rdr["Description"].ToString()
+                };
+            }
+            //
+            //
+            return raceDetails;
         }
     }
 }
