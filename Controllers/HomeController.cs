@@ -84,12 +84,5 @@ namespace RpgInfinity.Controllers
                 return View();
             }
         }
-
-        public ActionResult Logout()
-        {
-            _currentUser = null;
-
-            return RedirectToAction("Index");
-        }
     }
 }

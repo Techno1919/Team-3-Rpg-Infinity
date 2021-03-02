@@ -89,9 +89,6 @@ namespace RpgInfinity.Models
             }
         }
 
-        public CharacterClass.eClass eClass;
-        public CharacterRace.eRace eRace;
-
         CharacterClass CharClass { get; set; }
         CharacterRace CharRace { get; set; }
 

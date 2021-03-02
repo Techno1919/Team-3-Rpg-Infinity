@@ -68,6 +68,16 @@ namespace RpgInfinity.Models.Repos
             return retVal;
         }
 
+        internal void AddUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void LoginUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DeleteCharacter(int charId)
         {
             var retVal = false;
