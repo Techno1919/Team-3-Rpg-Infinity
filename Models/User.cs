@@ -14,11 +14,11 @@ namespace RpgInfinity.Models
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Username is Required")]
-        [MinLength(4, ErrorMessage = "Username must be 4 characters or longer.")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Username must be between 4 and 50 characters long.")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Password is Required")]
-        [MinLength(7, ErrorMessage = "Password must be 7 characters or longer.")]
+        [StringLength(50, MinimumLength = 7, ErrorMessage = "Password must be between 4 and 50 characters long.")]
         public string Password { get; set; }
     }
 }
