@@ -43,11 +43,17 @@ namespace RpgInfinity.Controllers
         {
             try
             {
-                var repo = new CharacterRepo();
+                var repo = new UserRepo();
 
-                repo.LoginUser(user);
+                var logUser = repo.LoginUser(user);
 
-                _currentUser = user;
+                if (logUser == null)
+                {
+                    ViewBag.ErrorMessage = "Username or Password was incorrect";
+                    return View();
+                }
+
+                _currentUser = logUser;
 
                 return RedirectToAction("Index");
             }
@@ -71,9 +77,15 @@ namespace RpgInfinity.Controllers
         {
             try
             {
-                var repo = new CharacterRepo();
+                var repo = new UserRepo();
 
-                repo.AddUser(user);
+                var isNewUser = repo.SignUp(user);
+
+                if (!isNewUser)
+                {
+                    ViewBag.ErrorMessage = "User already exists";
+                    return View();
+                }
 
                 return RedirectToAction("Index");
             }
@@ -83,6 +95,13 @@ namespace RpgInfinity.Controllers
 
                 return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            _currentUser = null;
+
+            return View("Index");
         }
     }
 }

@@ -255,6 +255,8 @@
     <Compile Include="Models\CharacterRace.cs" />
     <Compile Include="Models\Repos\CharacterRepo.cs" />
     <Compile Include="Models\Repos\ICharacterRepo.cs" />
+    <Compile Include="Models\Repos\IUserRepo.cs" />
+    <Compile Include="Models\Repos\UserRepo.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Weapon.cs" />
@@ -332,6 +334,8 @@
     <Content Include="Views\Character\Details.cshtml" />
     <Content Include="Views\Character\Index.cshtml" />
     <Content Include="Views\Character\Edit.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
