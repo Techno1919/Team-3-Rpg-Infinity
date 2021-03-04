@@ -57,6 +57,32 @@ namespace RpgInfinity.Controllers
             }
         }
 
+        // GET: Character/RandomCreate
+        public ActionResult RandomCreate()
+        {
+            return View();
+        }
+
+        // POST: Character/RandomCreate
+        [HttpPost]
+        public ActionResult RandomCreate(Character character)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                var repo = new CharacterRepo();
+
+                repo.AddRandomCharacter(character);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return View();
+            }
+        }
+
         // GET: Character/Edit/5
         public ActionResult Edit(int id)
         {

@@ -11,9 +11,13 @@ namespace RpgInfinity.Models.Repos
 {
     public class CharacterRepo : ICharacterRepo
     {
+        #region Properties
         private string _connString = ConfigurationManager.ConnectionStrings["RPGInfinityEntities"].ConnectionString;
         private IList<Character> _characterList;
+        private Random random = new Random();
+        #endregion
 
+        #region Constructor
         public CharacterRepo()
         {
             if (Equals(_characterList, null))
@@ -21,7 +25,9 @@ namespace RpgInfinity.Models.Repos
                 _characterList = new List<Character>();
             }
         }
+        #endregion
 
+        #region AddCharacter(Character character)
         public bool AddCharacter(Character character)
         {
             var retVal = false;
@@ -51,6 +57,17 @@ namespace RpgInfinity.Models.Repos
                     character.CharClassId = 4;
                 }*/
 
+                // Setting UserId
+                var _id = 0;
+                if(HomeController._currentUser == null)
+                {
+                    _id = 1;
+                }
+                else
+                {
+                    _id = HomeController._currentUser.ID;
+                }
+
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
                 cmd.Parameters.AddWithValue("@CharClass", v);
@@ -70,6 +87,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
+                cmd.Parameters.AddWithValue("@UserId", _id);
                 //
                 // Open DB Connection
                 con.Open();
@@ -86,17 +104,73 @@ namespace RpgInfinity.Models.Repos
             // Return Success / Failure
             return retVal;
         }
+        #endregion
 
-        internal void AddUser(User user)
+        #region AddRandomCharacter(Character character)
+        public bool AddRandomCharacter(Character character)
         {
-            throw new NotImplementedException();
-        }
+            var retVal = false;
 
-        internal void LoginUser(User user)
-        {
-            throw new NotImplementedException();
-        }
+            using (var con = new SqlConnection(_connString))
+            {
+                //
+                // Set-up command
+                var cmd = new SqlCommand("AddNewCharacter", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //
+                // Define StoredProc parameters
 
+                // Setting UserId
+                var _id = 0;
+                if (HomeController._currentUser == null)
+                {
+                    _id = 1;
+                }
+                else
+                {
+                    _id = HomeController._currentUser.ID;
+                }
+                var classValue = Character.classList[random.Next(0, 4)];
+                var raceValue = Character.raceList[random.Next(0, 3)];
+                var alignment = Character.alignments[random.Next(0, 9)];
+
+                cmd.Parameters.AddWithValue("@CharClass", classValue.Value);
+                cmd.Parameters.AddWithValue("@CharRace", raceValue.Value);
+                cmd.Parameters.AddWithValue("@Alignment", alignment);
+                cmd.Parameters.AddWithValue("@Name", character.Name);
+                cmd.Parameters.AddWithValue("@Gender", character.Gender);
+                cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
+                cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
+                cmd.Parameters.AddWithValue("@Level", 1);
+                cmd.Parameters.AddWithValue("@Health", 15);
+                cmd.Parameters.AddWithValue("@ArmorClass", 10);
+                cmd.Parameters.AddWithValue("@BaseAttackBonus", 1);
+                cmd.Parameters.AddWithValue("@Strength", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Dexterity", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Constitution", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Intelligence", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Wisdom", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Charisma", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@UserId", _id);
+                //
+                // Open DB Connection
+                con.Open();
+                //
+                // Execute command
+                int i = cmd.ExecuteNonQuery();
+
+                if (i >= 1)
+                {
+                    retVal = true;
+                }
+            }
+            //
+            // Return Success / Failure
+            return retVal;
+        }
+        #endregion
+
+        #region DeleteCharacter(int charId)
         public bool DeleteCharacter(int charId)
         {
             var retVal = false;
@@ -126,7 +200,9 @@ namespace RpgInfinity.Models.Repos
             // Return Success / Failure
             return retVal;
         }
+        #endregion
 
+        #region GetAllCharacters
         public IEnumerable<Character> GetAllCharacters()
         {
             //
@@ -173,7 +249,9 @@ namespace RpgInfinity.Models.Repos
             //
             return _characterList;
         }
+        #endregion
 
+        #region UpdateCharacter(Character character)
         public bool UpdateCharacter(Character character)
         {
             var retVal = false;
@@ -187,7 +265,15 @@ namespace RpgInfinity.Models.Repos
                 //
                 // Define StoredProc parameters
 
-                //HomeController._currentUser.ID;
+                var _id = 0;
+                if (HomeController._currentUser == null)
+                {
+                    _id = 1;
+                }
+                else
+                {
+                    _id = HomeController._currentUser.ID;
+                }
 
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
@@ -209,6 +295,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
+                cmd.Parameters.AddWithValue("@UserId", _id);
                 //
                 // Open DB Connection
                 con.Open();
@@ -225,7 +312,9 @@ namespace RpgInfinity.Models.Repos
             // Return Success / Failure
             return retVal;
         }
+        #endregion
 
+        #region GetCharacter(int id)
         public Character GetCharacter(int id)
         {
             Character chaDetails;
@@ -279,7 +368,9 @@ namespace RpgInfinity.Models.Repos
             //
             return chaDetails;
         }
+        #endregion
 
+        #region GetCharacterClass(int id)
         public CharacterClass GetCharacterClass(int id)
         {
             CharacterClass classDetails;
@@ -320,7 +411,9 @@ namespace RpgInfinity.Models.Repos
             //
             return classDetails;
         }
+        #endregion
 
+        #region GetCharacterRace(int id)
         public CharacterRace GetCharacterRace(int id)
         {
             CharacterRace raceDetails;
@@ -362,5 +455,6 @@ namespace RpgInfinity.Models.Repos
             //
             return raceDetails;
         }
+        #endregion
     }
 }
