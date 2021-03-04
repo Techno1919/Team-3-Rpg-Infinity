@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/rpg-infinity/databases/RPGInfinity",
+      "type": "mssql.azure",
+      "connectionId": "rpg-infinity.database.windows.net",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
