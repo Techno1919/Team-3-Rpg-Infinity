@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace RpgInfinity.Controllers
 {
-
     public class CharacterController : Controller
     {
         public static IEnumerable<Models.Character> characters = new List<Models.Character>();
+
         // GET: Character
         public ActionResult Index()
         {
@@ -126,6 +126,22 @@ namespace RpgInfinity.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Character/Race
+        public ActionResult Race(int id)
+        {
+            var repo = new CharacterRepo();
+
+            return View(repo.GetCharacterRace(id));
+        }
+
+        // GET: Character/Class
+        public ActionResult Class(int id)
+        {
+            var repo = new CharacterRepo();
+
+            return View(repo.GetCharacterClass(id));
         }
     }
 }

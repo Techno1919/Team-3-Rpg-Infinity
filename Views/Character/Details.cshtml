@@ -36,7 +36,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CharClass.Name)
+            @Html.ActionLink("Race", "Race", new { id = Model.CharRaceId })
+            @*@Html.DisplayNameFor(model => model.CharRace.Name)*@
         </dt>
 
         <dd>
@@ -44,7 +45,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CharRace.Name)
+            @Html.ActionLink("Class", "Class", new { id = Model.CharClassId })
+            @*@Html.DisplayNameFor(model => model.CharClass.Name)*@
         </dt>
 
         <dd>

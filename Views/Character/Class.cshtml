@@ -1,0 +1,51 @@
+﻿@model RpgInfinity.Models.CharacterClass
+
+@{
+    ViewBag.Title = "Class";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Class</h2>
+
+<div>
+    <h4>CharacterClass</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HitDie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HitDie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackBonusPerLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackBonusPerLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="backstory">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

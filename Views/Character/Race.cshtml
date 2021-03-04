@@ -1,0 +1,82 @@
+﻿@model RpgInfinity.Models.CharacterRace
+
+@{
+    ViewBag.Title = "Race";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Race</h2>
+
+<div>
+    <h4>CharacterRace</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StrengthBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StrengthBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DexterityBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DexterityBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConstitutionBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConstitutionBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IntelligenceBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IntelligenceBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WisdomBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WisdomBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharismaBonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharismaBonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="backstory">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
