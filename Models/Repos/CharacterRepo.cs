@@ -33,11 +33,27 @@ namespace RpgInfinity.Models.Repos
                 cmd.CommandType = CommandType.StoredProcedure;
                 //
                 // Define StoredProc parameters
+                /*if (character.ClassString.Equals("Wizard"))
+                {
+                    character.CharClassId = 1;
+                }
+                else if (character.ClassString.Equals("Cleric"))
+                {
+                    character.CharClassId = 2;
+                }
+                else if (character.ClassString.Equals("Rogue"))
+                {
+                    character.CharClassId = 3;
+                }
+                else if (character.ClassString.Equals("Warrior"))
+                {
+                    character.CharClassId = 4;
+                }*/
 
-                
-
-                cmd.Parameters.AddWithValue("@CharClass", character.CharClassId);
-                cmd.Parameters.AddWithValue("@CharRace", character.CharRaceId);
+                int.TryParse(character.ClassString, out var v);
+                int.TryParse(character.RaceString, out var b);
+                cmd.Parameters.AddWithValue("@CharClass", v);
+                cmd.Parameters.AddWithValue("@CharRace", b);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);

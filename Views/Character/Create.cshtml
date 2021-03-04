@@ -37,13 +37,23 @@
         @Html.LabelFor(model => model.Alignment, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("Alignment", new SelectList(Character.alignments), "Select Alignment", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Alignment, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CharClassString, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ClassString, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Class", new SelectList(CharacterClass.CharClass), "Select Class", new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.ClassString, (IEnumerable<SelectListItem>)Character.classList, "Select Class", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClassString, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RaceString, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.RaceString, (IEnumerable<SelectListItem>)Character.raceList, "Select Class", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RaceString, "", new { @class = "text-danger" })
         </div>
     </div>
 

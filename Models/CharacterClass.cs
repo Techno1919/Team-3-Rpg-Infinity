@@ -10,14 +10,6 @@ namespace RpgInfinity.Models
     [Table("CharacterClass")]
     public class CharacterClass
     {
-        public static string[] CharClass = new string[]
-        {
-            "Wizard",
-            "Cleric",
-            "Rogue",
-            "Warrior"
-        };
-
         [Key]
         public int ID { get; set; }
 

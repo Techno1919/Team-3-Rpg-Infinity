@@ -40,15 +40,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CharClass.Name)
+            @Html.DisplayFor(model => model.CharRace.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Backstory)
+            @Html.DisplayNameFor(model => model.CharRace.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Backstory)
+            @Html.DisplayFor(model => model.CharClass.Name)
         </dd>
 
         <dt>
@@ -177,6 +177,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Charisma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Backstory)
+        </dt>
+
+        <dd class="backstory">
+            @Html.DisplayFor(model => model.Backstory)
         </dd>
 
     </dl>

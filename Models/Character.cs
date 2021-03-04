@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 /// <summary>
 /// Summary description for Class1
@@ -28,36 +29,58 @@ namespace RpgInfinity.Models
             "Chaotic_Evil"
         };
 
+        public static List<SelectListItem> classList = new List<SelectListItem>()
+        {
+            new SelectListItem {Text = "Wizard", Value = "1"},
+            new SelectListItem {Text = "Cleric", Value = "2"},
+            new SelectListItem {Text = "Rogue", Value = "3"},
+            new SelectListItem {Text = "Warrior", Value = "4"},
+        };
+
+        public static List<SelectListItem> raceList = new List<SelectListItem>()
+        {
+            new SelectListItem {Text = "Human", Value = "1"},
+            new SelectListItem {Text = "Elf", Value = "2"},
+            new SelectListItem {Text = "Dwarf", Value = "3"}
+        };
+
         [Required(ErrorMessage = "Name is Required")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Gender is Required")]
         public string Gender { get; set; }
-        [Required(ErrorMessage = "Character Class is Required")]
+        [Required(ErrorMessage = "Class is Required")]
         [Display(Name="Class")]
-        public string CharClassString { get; set; }
+        public string ClassString { get; set; }
         public int CharClassId { get; set; }
-        [Required(ErrorMessage = "Character Race is Required")]
+        [Required(ErrorMessage = "Race is Required")]
         [Display(Name = "Race")]
+        public string RaceString { get; set; }
         public int CharRaceId { get; set; }
         [Required(ErrorMessage = "Alignment is Required")]
         public string Alignment { get; set; }
 
         [Required(ErrorMessage = "Strength is Required")]
+        [Range(3, 18)]
         public int Strength { get; set; }
         [Required(ErrorMessage = "Dexterity is Required")]
+        [Range(3, 18)]
         public int Dexterity { get; set; }
         [Required(ErrorMessage = "Constitution is Required")]
+        [Range(3, 18)]
         public int Constitution { get; set; }
         [Required(ErrorMessage = "Intelligence is Required")]
+        [Range(3, 18)]
         public int Intelligence { get; set; }
         [Required(ErrorMessage = "Wisdom is Required")]
+        [Range(3, 18)]
         public int Wisdom { get; set; }
         [Required(ErrorMessage = "Charisma is Required")]
+        [Range(3, 18)]
         public int Charisma { get; set; }
         public string Countries { get; set; }
 
         [Required(ErrorMessage = "Level is Required")]
-        public int Level { get; set; }
+        public int Level { get; set; } = 1;
         [Required(ErrorMessage = "Health is Required")]
         public int Health { get; set; }
         [Required(ErrorMessage = "Armor Class is Required")]

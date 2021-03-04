@@ -3,6 +3,11 @@
     padding-bottom: 20px;
 }
 
+.backstory{
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
