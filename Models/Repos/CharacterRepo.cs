@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgInfinity.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -185,9 +186,14 @@ namespace RpgInfinity.Models.Repos
                 cmd.CommandType = CommandType.StoredProcedure;
                 //
                 // Define StoredProc parameters
+
+                //HomeController._currentUser.ID;
+
+                int.TryParse(character.ClassString, out var v);
+                int.TryParse(character.RaceString, out var b);
                 cmd.Parameters.AddWithValue("@ID", character.ID);
-                cmd.Parameters.AddWithValue("@CharClass", character.CharClassId);
-                cmd.Parameters.AddWithValue("@CharRace", character.CharRaceId);
+                cmd.Parameters.AddWithValue("@CharClass", v);
+                cmd.Parameters.AddWithValue("@CharRace", b);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);
