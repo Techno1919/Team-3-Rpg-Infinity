@@ -116,6 +116,16 @@ namespace RpgInfinity.Models
         public CharacterClass CharClass { get; set; }
         public CharacterRace CharRace { get; set; }
 
+        public void AddRaceStatBonuses()
+        {
+            Strength += CharRace.StrengthBonus;
+            Dexterity += CharRace.DexterityBonus;
+            Constitution += CharRace.ConstitutionBonus;
+            Intelligence += CharRace.IntelligenceBonus;
+            Wisdom += CharRace.WisdomBonus;
+            Charisma += CharRace.CharismaBonus;
+        }
+
         public void SetStatBonuses()
         {
             StrengthBonus = SetStatBonus(Strength);
@@ -128,7 +138,14 @@ namespace RpgInfinity.Models
 
         private int SetStatBonus(int stat)
         {
-            var tempBonus = (stat - 10) / 2;
+            int tempBonus = (stat - 10) / 2;
+            if (stat < 10)
+            {
+                if (stat % 2 == 1)
+                {
+                    tempBonus -= 1;
+                }
+            }
 
             return tempBonus;
         }
@@ -139,7 +156,12 @@ namespace RpgInfinity.Models
             Level++;
 
             Health += (gen.Next(CharClass.HitDie + ConstitutionBonus) + 1);
-            BaseAttackBonus = (int)(Level * CharClass.AttackBonusPerLevel);
+            BaseAttackBonus = GetBaseAttackBonus(Level);
+        }
+
+        public int GetBaseAttackBonus(int level = 1)
+        {
+            return (int)(level * CharClass.AttackBonusPerLevel);
         }
 
         public void AddSpell(Spell spell)

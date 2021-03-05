@@ -40,22 +40,6 @@ namespace RpgInfinity.Models.Repos
                 cmd.CommandType = CommandType.StoredProcedure;
                 //
                 // Define StoredProc parameters
-                /*if (character.ClassString.Equals("Wizard"))
-                {
-                    character.CharClassId = 1;
-                }
-                else if (character.ClassString.Equals("Cleric"))
-                {
-                    character.CharClassId = 2;
-                }
-                else if (character.ClassString.Equals("Rogue"))
-                {
-                    character.CharClassId = 3;
-                }
-                else if (character.ClassString.Equals("Warrior"))
-                {
-                    character.CharClassId = 4;
-                }*/
 
                 // Setting UserId
                 var _id = 0;
@@ -70,6 +54,12 @@ namespace RpgInfinity.Models.Repos
 
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
+
+                character.CharRace = GetCharacterRace(b);
+                character.CharClass = GetCharacterClass(v);
+                character.AddRaceStatBonuses();
+                character.SetStatBonuses();
+
                 cmd.Parameters.AddWithValue("@CharClass", v);
                 cmd.Parameters.AddWithValue("@CharRace", b);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
@@ -133,7 +123,18 @@ namespace RpgInfinity.Models.Repos
                 var classValue = Character.classList[random.Next(0, 4)];
                 var raceValue = Character.raceList[random.Next(0, 3)];
                 var alignment = Character.alignments[random.Next(0, 9)];
-                var dex = random.Next(3, 19);
+
+                character.Strength = RollStat();
+                character.Dexterity = RollStat();
+                character.Constitution = RollStat();
+                character.Intelligence = RollStat();
+                character.Wisdom = RollStat();
+                character.Charisma = RollStat();
+
+                character.CharRace = GetCharacterRace(int.Parse(raceValue.Value));
+                character.CharClass = GetCharacterClass(int.Parse(classValue.Value));
+                character.AddRaceStatBonuses();
+                character.SetStatBonuses();
 
                 cmd.Parameters.AddWithValue("@CharClass", classValue.Value);
                 cmd.Parameters.AddWithValue("@CharRace", raceValue.Value);
@@ -143,15 +144,15 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
                 cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
                 cmd.Parameters.AddWithValue("@Level", 1);
-                cmd.Parameters.AddWithValue("@Health", 15);
-                cmd.Parameters.AddWithValue("@ArmorClass", dex + 10);
-                cmd.Parameters.AddWithValue("@BaseAttackBonus", 1);
-                cmd.Parameters.AddWithValue("@Strength", random.Next(3, 19));
-                cmd.Parameters.AddWithValue("@Dexterity", dex);
-                cmd.Parameters.AddWithValue("@Constitution", random.Next(3, 19));
-                cmd.Parameters.AddWithValue("@Intelligence", random.Next(3, 19));
-                cmd.Parameters.AddWithValue("@Wisdom", random.Next(3, 19));
-                cmd.Parameters.AddWithValue("@Charisma", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Health", (Roll(1, character.CharClass.HitDie) + character.ConstitutionBonus));
+                cmd.Parameters.AddWithValue("@ArmorClass", character.DexterityBonus + 10);
+                cmd.Parameters.AddWithValue("@BaseAttackBonus", character.GetBaseAttackBonus(1));
+                cmd.Parameters.AddWithValue("@Strength", character.Strength);
+                cmd.Parameters.AddWithValue("@Dexterity", character.Dexterity);
+                cmd.Parameters.AddWithValue("@Constitution", character.Constitution);
+                cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
+                cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
+                cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
                 //
                 // Open DB Connection
@@ -203,14 +204,24 @@ namespace RpgInfinity.Models.Repos
         }
         #endregion
 
-        #region GetAllCharacters
+        #region GetAllCharacters()
         public IEnumerable<Character> GetAllCharacters()
         {
+            int id;
+            if (HomeController._currentUser == null)
+            {
+                id = 1;
+            }
+            else
+            {
+                id = HomeController._currentUser.ID;
+            }
+
             //
             using (var con = new SqlConnection(_connString))
             {
                 //
-                var cmd = new SqlCommand("SELECT * FROM Characters", con);
+                var cmd = new SqlCommand($"select * from Characters where UserId = 1 or UserId = {id}", con);
                 cmd.CommandType = CommandType.Text;
                 //
                 con.Open();
@@ -455,6 +466,26 @@ namespace RpgInfinity.Models.Repos
             //
             //
             return raceDetails;
+        }
+        #endregion
+
+        #region RollStat()
+        public int RollStat()
+        {
+            return Roll(3, 6);
+        }
+        #endregion
+
+        #region Roll(int numDice, int numSides)
+        public int Roll(int numDice, int numSides)
+        {
+            var roll = 0;
+            for (int i = 0; i < numDice; i++)
+            {
+                roll += random.Next(1, (numSides+1));
+            }
+
+            return roll;
         }
         #endregion
     }
