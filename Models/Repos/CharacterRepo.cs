@@ -133,6 +133,7 @@ namespace RpgInfinity.Models.Repos
                 var classValue = Character.classList[random.Next(0, 4)];
                 var raceValue = Character.raceList[random.Next(0, 3)];
                 var alignment = Character.alignments[random.Next(0, 9)];
+                var dex = random.Next(3, 19);
 
                 cmd.Parameters.AddWithValue("@CharClass", classValue.Value);
                 cmd.Parameters.AddWithValue("@CharRace", raceValue.Value);
@@ -143,10 +144,10 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
                 cmd.Parameters.AddWithValue("@Level", 1);
                 cmd.Parameters.AddWithValue("@Health", 15);
-                cmd.Parameters.AddWithValue("@ArmorClass", 10);
+                cmd.Parameters.AddWithValue("@ArmorClass", dex + 10);
                 cmd.Parameters.AddWithValue("@BaseAttackBonus", 1);
                 cmd.Parameters.AddWithValue("@Strength", random.Next(3, 19));
-                cmd.Parameters.AddWithValue("@Dexterity", random.Next(3, 19));
+                cmd.Parameters.AddWithValue("@Dexterity", dex);
                 cmd.Parameters.AddWithValue("@Constitution", random.Next(3, 19));
                 cmd.Parameters.AddWithValue("@Intelligence", random.Next(3, 19));
                 cmd.Parameters.AddWithValue("@Wisdom", random.Next(3, 19));
