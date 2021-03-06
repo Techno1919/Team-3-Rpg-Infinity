@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RpgInfinity.Models.Character>
+﻿@using RpgInfinity.Controllers
+@model IEnumerable<RpgInfinity.Models.Character>
 
 @{
     ViewBag.Title = "Characters";
@@ -7,10 +8,14 @@
 
 <h2>Characters</h2>
 
-<p>
-    @Html.ActionLink("Roll Character", "Create") | 
-    @Html.ActionLink("Roll Random Character", "RandomCreate")
-</p>
+@if (HomeController._currentUser != null)
+{
+    <p>
+        @Html.ActionLink("Roll Character", "Create") |
+        @Html.ActionLink("Roll Random Character", "RandomCreate")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -31,9 +36,24 @@
                 @Html.DisplayFor(modelItem => item.Alignment)
             </td>
             <td>
-                @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
+                @if (item.UserId == 1 && HomeController._currentUser == null)
+                {
+                    <content>Default Character</content>
+                }
+                else
+                {
+                    @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID })
+                }
+
+                | @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+                @if (item.UserId != 1)
+                {
+                    @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
+                }
+                else
+                {
+                    <content>Default Character</content>
+                }
             </td>
         </tr>
     }

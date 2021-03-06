@@ -16,6 +16,8 @@ namespace RpgInfinity.Models
         [Key]
         public int ID { get; set; }
 
+        public int UserId { get; set; }
+
         public static List<string> alignments = new List<string>()
         {
             "Lawful_Good",
@@ -98,10 +100,15 @@ namespace RpgInfinity.Models
         public string Backstory { get; set; }
 
         public bool isSpellCaster { get; set; }
+        /*
         public List<Spell> SpellsList 
         {
             get
             {
+                if (SpellsList == null)
+                {
+                    SpellsList = new List<Spell>();
+                }
                 return SpellsList;
             }
             set
@@ -112,6 +119,7 @@ namespace RpgInfinity.Models
                 }
             }
         }
+        */
 
         public CharacterClass CharClass { get; set; }
         public CharacterRace CharRace { get; set; }
@@ -164,6 +172,7 @@ namespace RpgInfinity.Models
             return (int)(level * CharClass.AttackBonusPerLevel);
         }
 
+        /*
         public void AddSpell(Spell spell)
         {
             if (isSpellCaster)
@@ -171,6 +180,7 @@ namespace RpgInfinity.Models
                 SpellsList.Add(spell);
             }
         }
+        */
     }
 
 

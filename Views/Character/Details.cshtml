@@ -1,4 +1,5 @@
-﻿@model RpgInfinity.Models.Character
+﻿@using RpgInfinity.Controllers
+@model RpgInfinity.Models.Character
 
 @{
     ViewBag.Title = "Details";
@@ -192,6 +193,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (HomeController._currentUser != null)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    }
+    | @Html.ActionLink("Back to List", "Index")
 </p>

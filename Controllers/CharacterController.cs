@@ -11,6 +11,7 @@ namespace RpgInfinity.Controllers
     public class CharacterController : Controller
     {
         public static IEnumerable<Models.Character> characters = new List<Models.Character>();
+        private static int? characterUserId;
 
         // GET: Character
         public ActionResult Index()
@@ -88,18 +89,32 @@ namespace RpgInfinity.Controllers
         {
             var repo = new CharacterRepo();
 
-            return View(repo.GetCharacter(id));
+            Character character = repo.GetCharacter(id);
+            characterUserId = character.UserId;
+
+            return View(character);
         }
 
         // POST: Character/Edit/5
         [HttpPost]
         public ActionResult Edit(Character character)
         {
-                var repo = new CharacterRepo();
+            var repo = new CharacterRepo();
 
+            if (characterUserId == 1)
+            {
+                if (HomeController._currentUser != null)
+                {
+                    repo.AddCharacter(character);
+                }
+            }
+            else
+            {
                 repo.UpdateCharacter(character);
+            }
+            characterUserId = null;
 
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         // GET: Character/Delete/5
@@ -107,7 +122,16 @@ namespace RpgInfinity.Controllers
         {
             var repo = new CharacterRepo();
 
-            return View(repo.GetCharacter(id));
+            Character character = repo.GetCharacter(id);
+
+            if (character.UserId == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(repo.GetCharacter(id));
+            }
         }
 
         // POST: Character/Delete/5

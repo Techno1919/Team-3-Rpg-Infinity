@@ -78,6 +78,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
+                cmd.Parameters.AddWithValue("@ImagePath", String.Empty);
                 //
                 // Open DB Connection
                 con.Open();
@@ -154,6 +155,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
+                cmd.Parameters.AddWithValue("@ImagePath", String.Empty);
                 //
                 // Open DB Connection
                 con.Open();
@@ -251,6 +253,7 @@ namespace RpgInfinity.Models.Repos
                     cha.Intelligence = (int)rdr["Intelligence"];
                     cha.Wisdom = (int)rdr["Wisdom"];
                     cha.Charisma = (int)rdr["Charisma"];
+                    cha.UserId = (int)rdr["UserId"];
 
                     //
                     // Add your object to your list
@@ -370,7 +373,8 @@ namespace RpgInfinity.Models.Repos
                     Constitution = (int)rdr["Constitution"],
                     Intelligence = (int)rdr["Intelligence"],
                     Wisdom = (int)rdr["Wisdom"],
-                    Charisma = (int)rdr["Charisma"]
+                    Charisma = (int)rdr["Charisma"],
+                    UserId = (int)rdr["UserId"]
                 };
                 chaDetails.SetStatBonuses();
                 chaDetails.CharClass = GetCharacterClass(chaDetails.CharClassId);
