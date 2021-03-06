@@ -34,5 +34,7 @@ namespace RpgInfinity
         public System.Data.Entity.DbSet<RpgInfinity.Models.CharacterRace> CharacterRaces { get; set; }
 
         public System.Data.Entity.DbSet<RpgInfinity.Models.CharacterClass> CharacterClasses { get; set; }
+
+        public System.Data.Entity.DbSet<RpgInfinity.Models.Image> Images { get; set; }
     }
 }

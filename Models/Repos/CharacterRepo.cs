@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -276,11 +277,11 @@ namespace RpgInfinity.Models.Repos
                     _id = HomeController._currentUser.ID;
                 }
 
-                int.TryParse(character.ClassString, out var v);
-                int.TryParse(character.RaceString, out var b);
+                int.TryParse(Character.classList[3].ToString(), out var v);
+                int.TryParse(Character.raceList[0].ToString(), out var b);
                 cmd.Parameters.AddWithValue("@ID", character.ID);
-                cmd.Parameters.AddWithValue("@CharClass", v);
-                cmd.Parameters.AddWithValue("@CharRace", b);
+                cmd.Parameters.AddWithValue("@CharClass", 4);
+                cmd.Parameters.AddWithValue("@CharRace", 1);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);
@@ -297,6 +298,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
+                cmd.Parameters.AddWithValue("@ImagePath", character.ImagePath);
                 //
                 // Open DB Connection
                 con.Open();
@@ -457,5 +459,36 @@ namespace RpgInfinity.Models.Repos
             return raceDetails;
         }
         #endregion
+
+        public Character AddImage(Image img, HttpPostedFileBase file, int id)
+        {
+            Character cha = GetCharacter(id);
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                    string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+                                               Path.GetFileName(file.FileName));
+                    img.ImagePath = path;
+                    /*file.SaveAs(path);*/
+                    WriteFileFromStream(file.InputStream, path);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+            cha.ImagePath = file.FileName;
+            UpdateCharacter(cha);
+
+            return cha;
+        }
+
+        public static void WriteFileFromStream(Stream stream, string toFile)
+        {
+            using (FileStream fileToSave = new FileStream(toFile, FileMode.Create))
+            {
+                stream.CopyTo(fileToSave);
+            }
+        }
     }
 }

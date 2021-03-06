@@ -33,7 +33,8 @@
             <td>
                 @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
+                @Html.ActionLink("Delete Character", "Delete", new { id = item.ID }) |
+                @Html.ActionLink("Add Character Image", "AddImage", new { id = item.ID })
             </td>
         </tr>
     }
