@@ -60,6 +60,11 @@ namespace RpgInfinity.Models.Repos
                 character.AddRaceStatBonuses();
                 character.SetStatBonuses();
 
+                if (String.IsNullOrEmpty(character.Backstory))
+                {
+                    character.Backstory = String.Empty;
+                }
+
                 cmd.Parameters.AddWithValue("@CharClass", v);
                 cmd.Parameters.AddWithValue("@CharRace", b);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
@@ -136,6 +141,11 @@ namespace RpgInfinity.Models.Repos
                 character.CharClass = GetCharacterClass(int.Parse(classValue.Value));
                 character.AddRaceStatBonuses();
                 character.SetStatBonuses();
+
+                if (String.IsNullOrEmpty(character.Backstory))
+                {
+                    character.Backstory = String.Empty;
+                }
 
                 cmd.Parameters.AddWithValue("@CharClass", classValue.Value);
                 cmd.Parameters.AddWithValue("@CharRace", raceValue.Value);
@@ -288,6 +298,11 @@ namespace RpgInfinity.Models.Repos
                 else
                 {
                     _id = HomeController._currentUser.ID;
+                }
+
+                if (String.IsNullOrEmpty(character.Backstory))
+                {
+                    character.Backstory = String.Empty;
                 }
 
                 int.TryParse(character.ClassString, out var v);
