@@ -124,7 +124,9 @@ namespace RpgInfinity.Models
         }
         */
 
+        [Display(Name = "Class")]
         public CharacterClass CharClass { get; set; }
+        [Display(Name = "Race")]
         public CharacterRace CharRace { get; set; }
 
         public void AddRaceStatBonuses()
