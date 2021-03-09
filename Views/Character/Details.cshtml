@@ -9,11 +9,9 @@
 
 <div>
     <h4>Character</h4>
+    <img style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            <img src="~/Images/@Html.DisplayFor(model => model.ImagePath)" />
-        </dt>
 
         <dt>
             @Html.DisplayNameFor(model => model.Alignment)

@@ -361,7 +361,8 @@ namespace RpgInfinity.Models.Repos
                     Constitution = (int)rdr["Constitution"],
                     Intelligence = (int)rdr["Intelligence"],
                     Wisdom = (int)rdr["Wisdom"],
-                    Charisma = (int)rdr["Charisma"]
+                    Charisma = (int)rdr["Charisma"],
+                    ImagePath = rdr["ImagePath"].ToString()
                 };
                 chaDetails.SetStatBonuses();
                 chaDetails.CharClass = GetCharacterClass(chaDetails.CharClassId);
@@ -460,13 +461,14 @@ namespace RpgInfinity.Models.Repos
         }
         #endregion
 
+        #region AddImage(Image img, HttpPostedFileBase file, int id)
         public Character AddImage(Image img, HttpPostedFileBase file, int id)
         {
             Character cha = GetCharacter(id);
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images"),
+                    string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/"),
                                                Path.GetFileName(file.FileName));
                     img.ImagePath = path;
                     /*file.SaveAs(path);*/
@@ -477,12 +479,14 @@ namespace RpgInfinity.Models.Repos
                     Console.WriteLine(ex);
                 }
 
-            cha.ImagePath = file.FileName;
+            cha.ImagePath = "~/Images/" + file.FileName;
             UpdateCharacter(cha);
 
             return cha;
         }
+        #endregion
 
+        #region WriteFileFromStream(Stream stream, string toFile)
         public static void WriteFileFromStream(Stream stream, string toFile)
         {
             using (FileStream fileToSave = new FileStream(toFile, FileMode.Create))
@@ -490,5 +494,6 @@ namespace RpgInfinity.Models.Repos
                 stream.CopyTo(fileToSave);
             }
         }
+        #endregion
     }
 }

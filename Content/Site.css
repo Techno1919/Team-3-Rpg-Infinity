@@ -3,6 +3,11 @@
     padding-bottom: 20px;
 }
 
+.image{
+    width: 100px;
+    height: 100px;
+}
+
 .backstory{
     width: 100% !important;
     height: 100% !important;
