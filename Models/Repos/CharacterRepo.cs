@@ -265,6 +265,8 @@ namespace RpgInfinity.Models.Repos
                     cha.Wisdom = (int)rdr["Wisdom"];
                     cha.Charisma = (int)rdr["Charisma"];
                     cha.UserId = (int)rdr["UserId"];
+                    cha.CharClass = GetCharacterClass(cha.CharClassId);
+                    cha.CharRace = GetCharacterRace(cha.CharRaceId);
 
                     //
                     // Add your object to your list
@@ -305,7 +307,7 @@ namespace RpgInfinity.Models.Repos
                 {
                     character.Backstory = String.Empty;
                 }
-
+  
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
                 cmd.Parameters.AddWithValue("@ID", character.ID);
@@ -522,6 +524,26 @@ namespace RpgInfinity.Models.Repos
             {
                 stream.CopyTo(fileToSave);
             }
+        }
+        #endregion
+
+        #region RollStat()
+        public int RollStat()
+        {
+            return Roll(3, 6);
+        }
+        #endregion
+
+        #region Roll(int numDice, int numSides)
+        public int Roll(int numDice, int numSides)
+        {
+            var roll = 0;
+            for (int i = 0; i < numDice; i++)
+            {
+                roll += random.Next(1, (numSides + 1));
+            }
+
+            return roll;
         }
         #endregion
     }

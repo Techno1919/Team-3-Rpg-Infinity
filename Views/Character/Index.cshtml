@@ -20,6 +20,16 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RaceString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Alignment)
@@ -28,34 +38,41 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alignment)
-            </td>
-            <td>
-                @if (item.UserId == 1 && HomeController._currentUser == null)
-                {
-                    <content>Default Character</content>
-                }
-                else
-                {
-                    @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID })
-                }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CharClass.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CharRace.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Level)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Alignment)
+    </td>
 
-                | @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
-                @if (item.UserId != 1)
-                {
-                    @Html.ActionLink("Delete Character", "Delete", new { id = item.ID })
-                }
-                else
-                {
-                    <content>Default Character</content>
-                }
-            </td>
-        </tr>
+    <td>
+        @if (item.UserId == 1 && HomeController._currentUser == null)
+        {
+<content>Default Character</content> }
+else
+{
+@Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID })}
+
+        | @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+        @if (item.UserId != 1)
+        {
+@Html.ActionLink("Delete Character", "Delete", new { id = item.ID }) }
+else
+{
+<content>Default Character</content>}
+        | @Html.ActionLink("Add Character Image", "AddImage", new { id = item.ID })
+    </td>
+</tr>
     }
 
 </table>

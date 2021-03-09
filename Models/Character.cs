@@ -84,6 +84,7 @@ namespace RpgInfinity.Models
         public string Countries { get; set; }
 
         [Required(ErrorMessage = "Level is Required")]
+        [Range(1, int.MaxValue)]
         public int Level { get; set; } = 1;
         [Required(ErrorMessage = "Health is Required")]
         public int Health { get; set; }
