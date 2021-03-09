@@ -35,6 +35,14 @@ textarea {
     max-width: 280px;
 }
 
+.Rounded-Corners {
+    border-radius: 30px;
+}
+
+.Image {
+    border: 3px solid #8860D0;
+}
+
 .LGSU {
     float: right;
 }
