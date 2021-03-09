@@ -311,6 +311,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
+                cmd.Parameters.AddWithValue("@ImagePath", String.Empty);
                 //
                 // Open DB Connection
                 con.Open();

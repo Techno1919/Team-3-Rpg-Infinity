@@ -21,6 +21,8 @@ namespace RpgInfinity.Controllers
 
             charList = repo.GetAllCharacters();
 
+            charList = charList.OrderByDescending(c => c.UserId).ToList();
+
             return View(charList);
         }
 

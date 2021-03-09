@@ -19,6 +19,7 @@ namespace RpgInfinity.Models
 
         [Required(ErrorMessage = "Password is Required")]
         [StringLength(50, MinimumLength = 7, ErrorMessage = "Password must be between 4 and 50 characters long.")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }
