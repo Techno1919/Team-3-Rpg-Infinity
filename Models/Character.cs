@@ -46,6 +46,8 @@ namespace RpgInfinity.Models
             new SelectListItem {Text = "Dwarf", Value = "3"}
         };
 
+
+        public string ImagePath { get; set; }
         [Required(ErrorMessage = "Name is Required")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Gender is Required")]

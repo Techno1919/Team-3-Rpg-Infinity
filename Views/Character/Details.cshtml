@@ -10,8 +10,10 @@
 
 <div>
     <h4>Character</h4>
+    <img style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
             @Html.DisplayNameFor(model => model.Alignment)
         </dt>

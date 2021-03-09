@@ -169,5 +169,19 @@ namespace RpgInfinity.Controllers
 
             return View(repo.GetCharacterClass(id));
         }
+
+        public ActionResult AddImage()
+        {
+            return View("AddImage");
+        }
+
+        [HttpPost]
+        public ActionResult AddImage(Image img, HttpPostedFileBase file, int id)
+        {
+            var repo = new CharacterRepo();
+
+            return View("Details", repo.AddImage(img, file, id));
+        }
+
     }
 }

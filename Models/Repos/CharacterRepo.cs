@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -308,8 +309,8 @@ namespace RpgInfinity.Models.Repos
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
                 cmd.Parameters.AddWithValue("@ID", character.ID);
-                cmd.Parameters.AddWithValue("@CharClass", v);
-                cmd.Parameters.AddWithValue("@CharRace", b);
+                cmd.Parameters.AddWithValue("@CharClass", 4);
+                cmd.Parameters.AddWithValue("@CharRace", 1);
                 cmd.Parameters.AddWithValue("@Alignment", character.Alignment);
                 cmd.Parameters.AddWithValue("@Name", character.Name);
                 cmd.Parameters.AddWithValue("@Gender", character.Gender);
@@ -326,7 +327,7 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Wisdom", character.Wisdom);
                 cmd.Parameters.AddWithValue("@Charisma", character.Charisma);
                 cmd.Parameters.AddWithValue("@UserId", _id);
-                cmd.Parameters.AddWithValue("@ImagePath", String.Empty);
+                cmd.Parameters.AddWithValue("@ImagePath", character.ImagePath);
                 //
                 // Open DB Connection
                 con.Open();
@@ -390,7 +391,7 @@ namespace RpgInfinity.Models.Repos
                     Intelligence = (int)rdr["Intelligence"],
                     Wisdom = (int)rdr["Wisdom"],
                     Charisma = (int)rdr["Charisma"],
-                    UserId = (int)rdr["UserId"]
+                    ImagePath = rdr["ImagePath"].ToString()
                 };
                 chaDetails.SetStatBonuses();
                 chaDetails.CharClass = GetCharacterClass(chaDetails.CharClassId);
@@ -489,23 +490,38 @@ namespace RpgInfinity.Models.Repos
         }
         #endregion
 
-        #region RollStat()
-        public int RollStat()
+        #region AddImage(Image img, HttpPostedFileBase file, int id)
+        public Character AddImage(Image img, HttpPostedFileBase file, int id)
         {
-            return Roll(3, 6);
+            Character cha = GetCharacter(id);
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                    string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/"),
+                                               Path.GetFileName(file.FileName));
+                    img.ImagePath = path;
+                    /*file.SaveAs(path);*/
+                    WriteFileFromStream(file.InputStream, path);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+            cha.ImagePath = "~/Images/" + file.FileName;
+            UpdateCharacter(cha);
+
+            return cha;
         }
         #endregion
 
-        #region Roll(int numDice, int numSides)
-        public int Roll(int numDice, int numSides)
+        #region WriteFileFromStream(Stream stream, string toFile)
+        public static void WriteFileFromStream(Stream stream, string toFile)
         {
-            var roll = 0;
-            for (int i = 0; i < numDice; i++)
+            using (FileStream fileToSave = new FileStream(toFile, FileMode.Create))
             {
-                roll += random.Next(1, (numSides+1));
+                stream.CopyTo(fileToSave);
             }
-
-            return roll;
         }
         #endregion
     }

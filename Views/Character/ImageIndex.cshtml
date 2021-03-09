@@ -1,0 +1,29 @@
+﻿@model IEnumerable<RpgInfinity.Models.Image>
+
+@{
+    ViewBag.Title = "Image Index";
+}
+
+<h2>Image Index</h2>
+@Html.ActionLink("Index", "Index");
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+            </td>
+        </tr>
+    }
+
+</table>
