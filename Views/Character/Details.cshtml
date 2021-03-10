@@ -12,7 +12,7 @@
     <h4>Character</h4>
     @if (!String.IsNullOrEmpty(Model.ImagePath))
     {
-        <img style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
+        <img class="Rounded-Corners Image" style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
     }
     <hr />
     <dl class="dl-horizontal">
