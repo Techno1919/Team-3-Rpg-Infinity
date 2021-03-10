@@ -57,20 +57,33 @@
 
     <td>
         @if (item.UserId == 1 && HomeController._currentUser == null)
-        {
-<content>Default Character</content> }
-else
-{
-@Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID })}
+         {
+            <content>Default Character</content> 
+         }
+         else
+         {
+            @Html.ActionLink("Edit Sheet", "Edit", new { id = item.ID })
+         }
 
-        | @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+         | @Html.ActionLink("View Sheet", "Details", new { id = item.ID }) |
+
         @if (item.UserId != 1)
-        {
-@Html.ActionLink("Delete Character", "Delete", new { id = item.ID }) }
-else
-{
-<content>Default Character</content>}
-        | @Html.ActionLink("Add Character Image", "AddImage", new { id = item.ID })
+         {
+            @Html.ActionLink("Delete Character", "Delete", new { id = item.ID }) 
+         }
+         else
+         {
+            <content>Default Character</content>
+         }
+        |
+        @if (item.UserId != 1)
+         {
+            @Html.ActionLink("Add Character Image", "AddImage", new { id = item.ID })
+         }
+         else
+         {
+            <content>Default Character</content>
+         }
     </td>
 </tr>
     }
