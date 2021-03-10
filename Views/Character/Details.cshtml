@@ -10,7 +10,10 @@
 
 <div>
     <h4>Character</h4>
-    <img style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
+    @if (!String.IsNullOrEmpty(Model.ImagePath))
+    {
+        <img style="width:150px; height:150px;" src=@Url.Content(Html.DisplayFor(model => model.ImagePath).ToString()) />
+    }
     <hr />
     <dl class="dl-horizontal">
 
