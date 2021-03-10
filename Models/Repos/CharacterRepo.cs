@@ -65,6 +65,8 @@ namespace RpgInfinity.Models.Repos
                 {
                     character.Backstory = String.Empty;
                 }
+                int ac = character.DexterityBonus + 10;
+                int health = character.ConstitutionBonus + 10;
 
                 cmd.Parameters.AddWithValue("@CharClass", v);
                 cmd.Parameters.AddWithValue("@CharRace", b);
@@ -74,9 +76,9 @@ namespace RpgInfinity.Models.Repos
                 cmd.Parameters.AddWithValue("@Backstory", character.Backstory);
                 cmd.Parameters.AddWithValue("@IsSpellCaster", character.isSpellCaster);
                 cmd.Parameters.AddWithValue("@Level", character.Level);
-                cmd.Parameters.AddWithValue("@Health", character.Health);
-                cmd.Parameters.AddWithValue("@ArmorClass", character.ArmorClass);
-                cmd.Parameters.AddWithValue("@BaseAttackBonus", character.BaseAttackBonus);
+                cmd.Parameters.AddWithValue("@Health", health);
+                cmd.Parameters.AddWithValue("@ArmorClass", ac);
+                cmd.Parameters.AddWithValue("@BaseAttackBonus", character.GetBaseAttackBonus(character.Level));
                 cmd.Parameters.AddWithValue("@Strength", character.Strength);
                 cmd.Parameters.AddWithValue("@Dexterity", character.Dexterity);
                 cmd.Parameters.AddWithValue("@Constitution", character.Constitution);
