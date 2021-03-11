@@ -309,6 +309,11 @@ namespace RpgInfinity.Models.Repos
                 {
                     character.Backstory = String.Empty;
                 }
+
+                if (String.IsNullOrEmpty(character.ImagePath))
+                {
+                    character.ImagePath = String.Empty;
+                }
   
                 int.TryParse(character.ClassString, out var v);
                 int.TryParse(character.RaceString, out var b);
@@ -395,7 +400,9 @@ namespace RpgInfinity.Models.Repos
                     Intelligence = (int)rdr["Intelligence"],
                     Wisdom = (int)rdr["Wisdom"],
                     Charisma = (int)rdr["Charisma"],
+                    UserId = (int)rdr["UserId"],
                     ImagePath = rdr["ImagePath"].ToString()
+                    
                 };
                 chaDetails.SetStatBonuses();
                 chaDetails.CharClass = GetCharacterClass(chaDetails.CharClassId);
@@ -475,18 +482,16 @@ namespace RpgInfinity.Models.Repos
                 rdr.Read();
                 //
                 // Populate our Student model
-                raceDetails = new CharacterRace
-                {
-                    ID = Convert.ToInt32(rdr["Id"]),
-                    Name = rdr["RaceString"].ToString(),
-                    StrengthBonus = (int)rdr["StrengthBonus"],
-                    DexterityBonus = (int)rdr["DexterityBonus"],
-                    ConstitutionBonus = (int)rdr["ConstitutionBonus"],
-                    IntelligenceBonus = (int)rdr["IntelligenceBonus"],
-                    WisdomBonus = (int)rdr["WisdomBonus"],
-                    CharismaBonus = (int)rdr["CharismaBonus"],
-                    Description = rdr["Description"].ToString()
-                };
+                raceDetails = new CharacterRace();
+                raceDetails.ID = Convert.ToInt32(rdr["Id"]);
+                raceDetails.Name = rdr["RaceString"].ToString();
+                raceDetails.StrengthBonus = (int)rdr["StrengthBonus"];
+                raceDetails.DexterityBonus = (int)rdr["DexterityBonus"];
+                raceDetails.ConstitutionBonus = (int)rdr["ConstitutionBonus"];
+                raceDetails.IntelligenceBonus = (int)rdr["IntelligenceBonus"];
+                raceDetails.WisdomBonus = (int)rdr["WisdomBonus"];
+                raceDetails.CharismaBonus = (int)rdr["CharismaBonus"];
+                raceDetails.Description = rdr["Description"].ToString();
             }
             //
             //
