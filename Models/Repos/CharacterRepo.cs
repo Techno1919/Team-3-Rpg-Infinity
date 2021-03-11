@@ -66,7 +66,7 @@ namespace RpgInfinity.Models.Repos
                     character.Backstory = String.Empty;
                 }
                 int ac = character.DexterityBonus + 10;
-                int health = character.ConstitutionBonus + 10;
+                int health = character.ConstitutionBonus + character.CharClass.HitDie;
 
                 cmd.Parameters.AddWithValue("@CharClass", v);
                 cmd.Parameters.AddWithValue("@CharRace", b);
